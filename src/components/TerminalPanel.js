@@ -8,7 +8,7 @@ const TerminalPanel = ({ logs }) => {
         color: '#d4d4d4',
         padding: '10px',
         fontFamily: 'monospace',
-        height: '150px',
+        height: '100%',
         overflowY: 'auto'
       }}
     >

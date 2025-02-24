@@ -5,7 +5,7 @@ const initialContracts = [
   {
     name: 'Contract1.cpp',
     content: `#include <iostream>
-    
+
 int main() {
   std::cout << "Hello, Qubic Smart Contract!" << std::endl;
   return 0;
@@ -13,7 +13,13 @@ int main() {
   },
   {
     name: 'Contract2.cpp',
-    content: `// Contract2 code goes here`
+    content: `#include <iostream>
+
+// Contract2 code goes here
+int main() {
+  std::cout << "This is Contract 2" << std::endl;
+  return 0;
+}`
   }
 ];
 
@@ -28,13 +34,13 @@ const FileExplorer = ({ onSelectFile, onCreateNew }) => {
     const fileName = prompt('Enter new contract name (with .cpp extension):');
     if (fileName) {
       const newContract = { name: fileName, content: '// New contract code' };
-      setContracts(prev => [...prev, newContract]);
+      setContracts((prev) => [...prev, newContract]);
       onCreateNew(newContract);
     }
   };
 
   return (
-    <div style={{ borderRight: '1px solid #ccc', padding: '10px', width: '250px' }}>
+    <div style={{ borderRight: '1px solid #ccc', padding: '10px', width: '200px' }}>
       <h3>Contracts</h3>
       <button onClick={handleCreateNew}>New Contract</button>
       <ul style={{ listStyle: 'none', padding: 0 }}>

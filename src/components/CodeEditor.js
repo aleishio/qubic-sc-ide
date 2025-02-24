@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
 
 const CodeEditor = ({ initialCode, onCodeChange }) => {
   const [code, setCode] = useState(initialCode || '');
+
+  // Update local state whenever the initialCode prop changes
+  useEffect(() => {
+    setCode(initialCode || '');
+  }, [initialCode]);
 
   const handleEditorChange = (value) => {
     setCode(value);
@@ -11,7 +16,7 @@ const CodeEditor = ({ initialCode, onCodeChange }) => {
 
   return (
     <Editor
-      height="70vh"
+      height="100%"
       defaultLanguage="cpp"
       value={code}
       onChange={handleEditorChange}
