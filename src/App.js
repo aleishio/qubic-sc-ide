@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import CodeEditor from './components/CodeEditor';
+import Compiler from './components/Compiler';
 
 function App() {
+  const [code, setCode] = useState('');
+
+  useEffect(() => {
+    // Fetch initial contract from public folder
+    fetch('/contracts/Contract1.cpp')
+      .then((res) => res.text())
+      .then(setCode)
+      .catch(console.error);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: '20px' }}>
+      <h1>Qubic Smart Contract IDE</h1>
+      <div style={{ marginBottom: '20px' }}>
+        <CodeEditor initialCode={code} onCodeChange={(newCode) => setCode(newCode)} />
+      </div>
+      <div>
+        <Compiler sourceCode={code} />
+      </div>
     </div>
   );
 }
